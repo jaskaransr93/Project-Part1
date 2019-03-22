@@ -24,17 +24,14 @@
 		<table border="0" cellspacing="2" cellpadding="5">
 			<thead>
 				<tr>
-					<th colspan="2">Register Product Form</th>
+					<th colspan="2">Claim Product Form</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td><label>User Name</label></td>
-					<td><input type="text" name="username" /></td>
-				</tr>
+				
 				<tr>
 					<td><label>Product Name</label></td>
-					<td><select name="pid">
+					<td><select name="pname">
 							<c:forEach var="row" items="${result.rows}">
 								<option value="<c:out value='${row.id}'/>"><c:out
 										value="${row.product_name}" /></option>
@@ -47,8 +44,12 @@
 					<td><input type="text" name="serial" /></td>
 				</tr>
 				<tr>
-					<td><label>Purchase Date</label></td>
+					<td><label>Date of claim</label></td>
 					<td><input type="text" name="pdate" id="datepicker"></td>
+				</tr>
+				<tr>
+					<td><label>Description</label></td>
+					<td><textarea rows="5" cols="" name="claim_details"></textarea></td>
 				</tr>
 
 

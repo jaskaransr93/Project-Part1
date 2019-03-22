@@ -4,14 +4,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>User Login</title>
     </head>
     <body>
-        <form action="insertRegisterUser.jsp" method="post">
+        <form action="doUserLogin.jsp" method="post">
             <table border="0" cellspacing="2" cellpadding="5">
                 <thead>
                     <tr>
-                        <th colspan="2">Register Form</th>
+                        <th colspan="2">User Login Form</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,24 +24,7 @@
                         <td><input type="password" name="upassword"/></td>
                     </tr>
                     <tr>
-                        <td><label>Cell No</label></td>
-                        <td><input type="text" name="cell"/></td>
-                    </tr>
-                    <tr>
-                        <td><label>Name</label></td>
-                        <td><input type="text" name="uname"/></td>
-                    </tr>
-                    <tr>
-                        <td><label>Email</label></td>
-                        <td><input type="text" name="email"/></td>
-                    </tr>
-                    <tr>
-                        <td><label>Address</label></td>
-                        <td><input type="text" name="address"/></td>
-                    </tr>
-                    
-                    <tr>
-                        <td><input type="submit" value="Save" /></td>
+                        <td><input type="submit" value="Login" /></td>
                         <td><input type="reset" value="reset"/></td>
                     </tr>
                 </tbody>
@@ -49,12 +32,9 @@
         </form>
         <font color="red"><c:if test="${not empty param.errMsg}">
             <c:out value="${param.errMsg}" />
-            
+           
         </c:if></font>
-        <font color="green"><c:if test="${not empty param.susMsg}">
-            <c:out value="${param.susMsg}" />
-            
-        </c:if></font>
+       
  
     </body>
 </html>
