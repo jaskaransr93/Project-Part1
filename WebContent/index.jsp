@@ -7,7 +7,12 @@
     </head>
     <body>
         <h1>Choose Option</h1>
-        <a href="insertProduct.jsp">Insert Product</a><p></p>
-        <a href="displayProduct.jsp">Update / Display Products</a>
+        <ul>
+        	<li><a href="insertProduct.jsp">Insert Product</a></li>
+        	<li><a href="displayProduct.jsp">Update/ Delete / Display Products</a></li>
+        	<li><a href="displayRegisteredProduct.jsp">Update/ Delete / Display Registered Products</a></li>
+        	<li><a href="displayUser.jsp">Update/ Delete / Display Registered Products</a></li>
+        </ul>      
+        
     </body>
 </html>
