@@ -10,6 +10,7 @@
 </head>
 <body>
 	<c:remove var="loginUser" scope="session" />
+	<c:remove var="loginUserName" scope="session" />
 	<c:redirect url="userLoginForm.jsp">
 		<c:param name="succMsg" value="Successfully Logged out!" />
 	</c:redirect>
