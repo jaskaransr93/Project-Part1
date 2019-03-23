@@ -7,7 +7,7 @@
         <title>JINSERT Operation</title>
     </head>
     <body>
-        <c:if test="${ empty param.username or empty param.upassword}">
+        <c:if test="${ empty param.username or empty param.upassword or empty param.email }">
             <c:redirect url="registerUserForm.jsp" >
                 <c:param name="errMsg" value="Please Enter Username and Password!" />
             </c:redirect>

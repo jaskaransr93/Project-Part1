@@ -22,6 +22,7 @@
             and upassword='${param.upassword}'
         </sql:query>
         <c:if test="${count.rowCount>0}">
+        
          <c:set scope="session"
                    var="loginUser"
                    value="${param.username}"/>
