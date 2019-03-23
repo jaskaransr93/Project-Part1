@@ -7,41 +7,54 @@
         <title>JINSERT Operation</title>
     </head>
     <body>
-        <c:if test="${ empty param.serial or empty param.pdate}">
-            <c:redirect url="registerUserForm.jsp" >
-                <c:param name="errMsg" value="Please Enter Serial No and Date of claim!" />
+        <c:if test="${ empty param.pdate}">
+            <c:redirect url="claimForm.jsp" >
+                <c:param name="errMsg" value="Please Enter Date of claim!" />
+                 <c:param name="pid" value="${param.pid}"/>
+                <c:param name="serial_no" value="${param.serial}"/>
             </c:redirect>
  
         </c:if>
-       <%--  <sql:setDataSource var="dbsource" driver="com.mysql.jdbc.Driver"
+      <sql:setDataSource var="dbsource" driver="com.mysql.jdbc.Driver"
                            url="jdbc:mysql://localhost:3306/project_part1"
                            user="${DbConfig.username}"  password="${DbConfig.password}"/>
         <sql:query dataSource="${dbsource}" var="count">
-            Select * FROM user
-            WHERE username='${param.username}'
+            Select * FROM product_claim
+            WHERE username='${sessionScope['loginUser']}' and pid=${param.pid} and claim_date='${param.pdate}'
         </sql:query>
         <c:if test="${count.rowCount>0}">
-             <c:redirect url="registerUserForm.jsp" >
-                <c:param name="errMsg" value="Username already exists!" />
+             <c:redirect url="claimForm.jsp" >
+                <c:param name="errMsg" value="Claim of same product already exists please check status under My Claims!" />
+                <c:param name="pid" value="${param.pid}"/>
+                <c:param name="serial_no" value="${param.serial}"/>
             </c:redirect>        
-        </c:if> --%>
+        </c:if> 
+        
+         <sql:query dataSource="${dbsource}" var="count">
+            Select * FROM product_claim
+            WHERE username='${sessionScope['loginUser']}' and pid=${param.pid} and serial_no='${param.serial}'
+        </sql:query>
+        <c:if test="${count.rowCount==3}">
+             <c:redirect url="claimForm.jsp" >
+                <c:param name="errMsg" value="Error You have been reached to max 3 numbers of Claim!" />
+                <c:param name="pid" value="${param.pid}"/>
+                <c:param name="serial_no" value="${param.serial}"/>
+            </c:redirect>        
+        </c:if> 
  
  
         <sql:update dataSource="${dbsource}" var="result">
-            INSERT INTO user(username, upassword,cellno,email,uname,address ) VALUES (?,?,?,?,?,?);
-            <sql:param value="${param.username}" />
-            <sql:param value="${param.upassword}" />
-            <sql:param value="${param.cell}" />
-            <sql:param value="${param.email}" />
-            <sql:param value="${param.uname}" />
-            <sql:param value="${param.address}" />
+            INSERT INTO product_claim(pid, serial_no,claim_date,details,claim_status,username) VALUES (?,?,?,?,?,?);
+            <sql:param value="${param.pid}" />
+            <sql:param value="${param.serial}" />
+            <sql:param value="${param.pdate}" />
+            <sql:param value="${param.claim_details}" />
+            <sql:param value="0" />
+            <sql:param value="${sessionScope['loginUser']}" />
         </sql:update>
         <c:if test="${result>=1}">
-            <font size="5" color='green'> Congratulations ! Data inserted
-            successfully.</font>
- 
-            <c:redirect url="registerUserForm.jsp" >
-                <c:param name="susMsg" value="Congratulations ! Data inserted
+            <c:redirect url="listClaims.jsp" >
+                <c:param name="susMsg" value="Congratulations ! Claim submitted
             successfully." />
             </c:redirect>
         </c:if> 

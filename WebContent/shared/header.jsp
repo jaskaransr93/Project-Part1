@@ -188,7 +188,7 @@
                 </a>
             </li>            
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin User <b class="fa fa-angle-down"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome ${sessionScope['loginUserName']}!<b class="fa fa-angle-down"></b></a>
                 <ul class="dropdown-menu">
                    
                     <li><a href="logoutUser.jsp"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>

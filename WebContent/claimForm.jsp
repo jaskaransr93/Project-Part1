@@ -13,11 +13,11 @@
         </sql:query>
 				<h1>Add new claim</h1>
 				<c:if test="${not empty param.errMsg}">
-					<div class="alert alert-success" role="alert">
+					<div class="alert alert-danger" role="alert">
 						<c:out value="${param.errMsg}" />
 					</div>
 				</c:if>
-				<form action="insertRegisterProduct.jsp" method="post">
+				<form action="insertClaimForm.jsp" method="post">
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group">
@@ -40,7 +40,7 @@
 								</select>
 							</div>
 						</div>
-						<input type="hidden" name="pname" value="${param.pid}" />
+						<input type="hidden" name="pid" value="${param.pid}" />
 					</div>
 					<div class="row">
 						<div class="col-md-6">
@@ -60,7 +60,7 @@
 						</div>
 					</div>
 
-					<input class="btn btn-success" type="submit" value="Register" /> <input
+					<input class="btn btn-success" type="submit" value="Submit" /> <input
 						class="btn btn-primary" type="reset" value="reset" />
 				</form>
 			</div>

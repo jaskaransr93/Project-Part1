@@ -10,31 +10,56 @@
 			<div class="col-sm-12 col-md-12 well" id="content">
 
 				<form style="display: inline-block">
-					<input type="text" name="search" /> <input type="submit"
-						value="Search" />
+					<div class="row">
+						<div class="col-md-6">
+							<div class="input-group">
+								<input type="search" name="search" placeholder="e-g Iphone X"
+									class="form-control"> <span class="input-group-btn">
+									<button class="btn btn-primary" type="submit">
+										<span class="glyphicon glyphicon-search" aria-hidden="true">
+										</span> Search!
+									</button>
+								</span>
+							</div>
+						</div>
+					
 				</form>
-				<form style="display: inline-block">
-					<input type="hidden" name="search" value="" /> <input
-						type="submit" value="Clear" />
+				<form>
+					
+						<div class="col-md-6">
+							<div class="input-group">
+								<input type="hidden" name="search" value=""
+									class="form-control"> <span class="input-group-btn">
+									<button class="btn btn-warning" type="submit">
+										<span class="glyphicon glyphicon-list" aria-hidden="true">
+										</span> List All
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
 				</form>
 
 				<c:choose>
 					<c:when test="${empty param.search}">
 						<sql:query dataSource="${dbsource}" var="result">
-            		SELECT * from registered_product;
+            		SELECT product_claim.*,product.product_name from product_claim JOIN product ON product_claim.pid=product.id  where username='${sessionScope['loginUser']}' order by product.product_name,product_claim.claim_date
         		</sql:query>
 					</c:when>
 					<c:otherwise>
 						<sql:query dataSource="${dbsource}" var="result">
-            		SELECT * from registered_product
-            		WHERE pid LIKE '%${param.search}%'  
+            		SELECT product_claim.*,product.product_name from product_claim JOIN product ON product_claim.pid=product.id  where product.product_name LIKE '%${param.search}%' and username='${sessionScope['loginUser']}' order by product.product_name,product_claim.claim_date  
         		</sql:query>
 					</c:otherwise>
 				</c:choose>
 				<h1>My Claims</h1>
-				   <c:set var="count" value="0" scope="page" />
+				<c:set var="count" value="0" scope="page" />
+				<c:if test="${not empty param.susMsg}">
+					<div class="alert alert-success" role="alert">
+						<c:out value="${param.susMsg}" />
+					</div>
+				</c:if>
 
-				
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
@@ -48,15 +73,43 @@
 					</thead>
 					<tbody>
 						<c:forEach var="row" items="${result.rows}">
-						<c:set var="count" value="${count + 1}" scope="page"/>
+							<c:set var="count" value="${count + 1}" scope="page" />
 							<tr>
-								<th scope="row"> <c:out value = "${count}"/></th>
-								<td><c:out value="${row.pid}" /></td>
-								<td><c:out value="${row.serialno}" /></td>
-								<td><c:out value="${row.purchase_date}" /></td>
-								<td><a href="claimForm.jsp?pid=<c:out value="${row.pid}"/>"><button type="button" class="btn btn-primary">Add Claim</button></a></td>
+								<th scope="row"><c:out value="${count}" /></th>
+								<td><c:out value="${row.product_name}" /></td>
+								<td><c:out value="${row.serial_no}" /></td>
+								<td><c:out value="${row.claim_date}" /></td>
+								<td><c:out value="${row.details}" /></td>
+								<td>
+								<c:choose>
+
+									<c:when test="${row.claim_status == 0}">
+            							<span class="badge" style="background-color: #ffc107;color:black">Pending</span>
+            							
+         							</c:when>
+
+									<c:when test="${row.claim_status == 1}">
+            								<span class="badge" style="background-color: #28a745">Approved</span>
+
+        							 </c:when>
+
+									<c:otherwise>
+            						<span class="badge" style="background-color: #dc3545">Rejected</span>
+
+         							</c:otherwise>
+								</c:choose>
+								
+								
+								
+								</td>
 							</tr>
 						</c:forEach>
+						<c:if test="${result.rowCount==0}">
+							<tr class="text-center">
+								<td colspan="6"><span style="color: red">No claims
+										found!</span> <a href="ListRegisteredProducts.jsp">Add new Claim</a></td>
+							</tr>
+						</c:if>
 					</tbody>
 				</table>
 			</div>
