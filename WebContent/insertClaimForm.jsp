@@ -44,7 +44,7 @@
             </c:redirect>        
         </c:if> 
         
-<%--         <sql:query dataSource="${dbsource}" var="result">
+        <sql:query dataSource="${dbsource}" var="result">
             select purchase_date  from registered_product
 			where serialno = '${param.serial}';
         </sql:query>
@@ -54,6 +54,7 @@
 			PreparedStatement ps = con.prepareStatement("select purchase_date  from registered_product where serialno = ? ");
 			ps.setString(1, request.getParameter("serial"));
 			ResultSet rs = ps.executeQuery();
+			boolean shouldRedirect = false;
 			if (rs.next()) {
 				java.sql.Date purchaseDate = rs.getDate(1);
 				Calendar calendar = Calendar.getInstance();
@@ -61,21 +62,22 @@
 				calendar.add(Calendar.YEAR, 5);
 				java.util.Date pc = calendar.getTime();
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				;
 				if (pc.before(sdf.parse(request.getParameter("pdate")))) {
-					String pid = request.getParameter("pid");
-					String serial_no = request.getParameter("serial");
-					String url = "claimForm.jsp?errMsg=Your claim date exceeds the protection plan!&pid=" + pid +"&serial_no=" + serial_no;
-/* 					response.sendRedirect(url);
- */					RequestDispatcher dd = request.getRequestDispatcher(url);
-
-					dd.forward(request, response);
+					shouldRedirect = true;
 				}
 			}
 		%>
-  --%>
- 
-        <sql:update dataSource="${dbsource}" var="result">
+		<c:set var = "shouldRedirectBack"><%=shouldRedirect %></c:set>
+	<c:if test="${shouldRedirectBack}">
+		<c:redirect url="claimForm.jsp">
+			<c:param name="errMsg"
+				value="Your 5 year protection plan is over!" />
+			<c:param name="pid" value="${param.pid}" />
+			<c:param name="serial_no" value="${param.serial}" />
+		</c:redirect>
+	</c:if>
+
+	<sql:update dataSource="${dbsource}" var="result">
             INSERT INTO product_claim(pid, serial_no,claim_date,details,claim_status,username) VALUES (?,?,?,?,?,?);
             <sql:param value="${param.pid}" />
             <sql:param value="${param.serial}" />
