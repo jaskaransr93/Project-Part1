@@ -39,11 +39,16 @@
 <body>
 	<form class="form-signin" action="doAdminLogin.jsp" method="post">
 		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		<c:if test="${not empty param.succMsg}">
+		<div class="alert alert-success" role="alert">
+		  <c:out value="${param.succMsg}" />
+           </div>
+        </c:if>
 		<c:if test="${not empty param.errMsg}">
-			<div class="alert alert-danger" role="alert">
-				<c:out value="${param.errMsg}" />
-			</div>
-		</c:if>
+		<div class="alert alert-danger" role="alert">
+		  <c:out value="${param.errMsg}" />
+           </div>
+        </c:if>
 		<label for="inputUsername" class="sr-only">User Name</label> 
 		<input
 			type="username" id="inputUsername" class="form-control"

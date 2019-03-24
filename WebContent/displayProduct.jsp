@@ -85,7 +85,7 @@
 									<td><c:out value="${row.product_name}" /></td>
 									<td><c:out value="${row.color}" /></td>												
 									<td>
-										<a class="btn btn-primary" href="updateProduct.jsp?id=<c:out value="${row.id}"/>">Update</a>
+										<a class="btn btn-success" href="updateProduct.jsp?id=<c:out value="${row.id}"/>">Update</a>
 									</td>
 									<td>
 										<a class="btn btn-danger" href="javascript:confirmGo('Sure to delete this record?','deleteProductdb.jsp?id=<c:out value="${row.id}"/>')">Delete

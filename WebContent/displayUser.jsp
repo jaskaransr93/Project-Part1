@@ -22,10 +22,9 @@
 								</span>
 							</div>
 						</div>
-					
+					</div>
 				</form>
 				<form>
-					
 						<div class="col-md-6">
 							<div class="input-group">
 								<input type="hidden" name="search" value=""
@@ -37,13 +36,12 @@
 								</span>
 							</div>
 						</div>
-					</div>
 				</form>
 				<c:choose>
 					<c:when test="${empty param.search}">
-						<sql:query dataSource="${dbsource}" var="result">
+					<sql:query dataSource="${dbsource}" var="result">
             			SELECT * from user;
-	        	</sql:query>
+	        		</sql:query>
 					</c:when>
 					<c:otherwise>
 						<sql:query dataSource="${dbsource}" var="result">
@@ -78,8 +76,8 @@
 		                    <th>Email</th>
 		                    <th>Name</th>
 		                    <th>Address</th>
-<!-- 							<th colspan="2">Action</th>
- -->						</tr>
+		                  	<th>Details</th>
+						</tr>
 					</thead>
 					<tbody>
 						<c:if test="${result.rowCount>0}">
@@ -92,13 +90,16 @@
 									<td><c:out value="${row.cellno}" /></td>		
 									<td><c:out value="${row.email}" /></td>		
 									<td><c:out value="${row.uname}" /></td>	
-									<td><c:out value="${row.address}" /></td>																																																																																			
+									<td><c:out value="${row.address}" /></td>	
+									<td><a class="btn btn-light"
+								href="displayUserDetails.jsp?username=<c:out value="${row.username}"/>&claim_status=1">Details</a></td>																																																																																																																																																																				
 								</tr>
 							</c:forEach>
 						</c:if>
 
 					</tbody>
 				</table>
+				
 			</div>
 		</div>
 		<!-- /.row -->

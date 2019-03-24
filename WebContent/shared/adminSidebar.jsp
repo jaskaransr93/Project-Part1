@@ -6,7 +6,7 @@
 				class="fa fa-fw fa-angle-down pull-right"></i></a>
 			<ul id="submenu-1" class="collapse">
 				<li><a href="insertProduct.jsp"><i
-						class="fa fa-angle-double-right"></i>Insert Product</a></li>
+						class="fa fa-angle-double-right"></i> Insert Product</a></li>
 				<li><a href="displayProduct.jsp"
 					class="fa fa-angle-double-right"> Display Products</a></li>
 				<li><a href="displayRegisteredProduct.jsp"
