@@ -12,6 +12,16 @@
 	<sql:setDataSource var="dbsource" driver="com.mysql.jdbc.Driver"
 		url="jdbc:mysql://localhost:3306/project_part1"
 		user="${DbConfig.username}" password="${DbConfig.password}" />
+	<sql:query dataSource="${dbsource}" var="result">
+		SELECT * from registered_product
+		WHERE pid =  '${param.id}'
+    </sql:query>
+	<c:if test="${result.rowCount > 0}">
+			<c:redirect url="displayProduct.jsp">
+				<c:param name="errMsg" value="Can't Delete registered Product."></c:param>
+			</c:redirect>
+	</c:if>
+
 	<sql:update dataSource="${dbsource}" var="count">
             DELETE FROM product
             WHERE id=?
