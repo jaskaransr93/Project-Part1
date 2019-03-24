@@ -14,18 +14,24 @@
                            user="${DbConfig.username}"  password="${DbConfig.password}"/>
                            
         <sql:update dataSource="${dbsource}" var="count">
-            UPDATE product SET color=?
-            WHERE product_name='${param.product_name}'
+            UPDATE product 
+            SET color=?, product_name=?
+            WHERE id=?
             <sql:param value="${param.color}" />
+            <sql:param value="${param.product_name}" />
+            <sql:param value="${param.id}" />
         </sql:update>
         <c:choose>
-        	<c:when test="${count>=1}">
-        	    <font size="5" color='green'> Congratulations ! Data updated
-            		successfully.</font>
-            	<a href="index.jsp">Go Home</a>    
+        	<c:when test="${count>=1}"> 
+            	<c:redirect url="displayProduct.jsp">
+            		<c:param name="susMsg" value="Congratulations ! Data updated
+            		successfully."></c:param>
+            	</c:redirect>
         	</c:when>
         	<c:otherwise>
-        		<font size="5" color='red'> Failed to update record</font>
+        		<c:redirect url="displayProduct.jsp">
+            		<c:param name="errMsg" value="Failed to update record."></c:param>
+            	</c:redirect>
         	</c:otherwise>
         </c:choose>
     </body>

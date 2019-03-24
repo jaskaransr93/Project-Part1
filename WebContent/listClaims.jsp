@@ -42,13 +42,19 @@
 
 				<c:choose>
 					<c:when test="${empty param.search}">
-						<sql:query dataSource="${dbsource}" var="result">
-            		SELECT product_claim.*,product.product_name from product_claim JOIN product ON product_claim.pid=product.id  where username='${sessionScope['loginUser']}' order by product.product_name,product_claim.claim_date
+				<sql:query dataSource="${dbsource}" var="result">
+            		SELECT product_claim.*,product.product_name 
+            		from product_claim JOIN product ON product_claim.pid=product.id  
+            		where username='${sessionScope.loginUser}' 
+            		order by product.product_name,product_claim.claim_date
         		</sql:query>
 					</c:when>
 					<c:otherwise>
 						<sql:query dataSource="${dbsource}" var="result">
-            		SELECT product_claim.*,product.product_name from product_claim JOIN product ON product_claim.pid=product.id  where product.product_name LIKE '%${param.search}%' and username='${sessionScope['loginUser']}' order by product.product_name,product_claim.claim_date  
+            		SELECT product_claim.*,product.product_name 
+            		from product_claim JOIN product ON product_claim.pid=product.id  
+            		where product.product_name LIKE '%${param.search}%' and username='${sessionScope.loginUser}'
+            		order by product.product_name,product_claim.claim_date  
         		</sql:query>
 					</c:otherwise>
 				</c:choose>

@@ -186,7 +186,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="http://cijulenlinea.ucr.ac.cr/dev-users/">
-                <img src="http://placehold.it/200x50&text=LOGO" alt="LOGO"">
+                <img width="155" src="http://www.theprojectilkeston.co.uk/wordpress/wp-content/uploads/2017/01/The-Project-Logo-300x116.jpg" alt="LOGO"">
             </a>
         </div>
         <!-- Top Menu Items -->

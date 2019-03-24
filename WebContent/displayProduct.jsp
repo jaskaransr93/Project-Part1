@@ -9,13 +9,34 @@
 		<div class="row" id="main">
 			<div class="col-sm-12 col-md-12 well" id="content">
 
-				<form style="display: inline-block; style: 500px">
-					<input type="text" name="search" class="form-control" />
-					<button class="btn btn-primary" type="submit" value="Search">Search</button>
-				</form>
 				<form style="display: inline-block">
-					<input type="hidden" name="search" value="" /> 
-					<button class="btn btn-warning" type="submit" value="Clear">List All</button>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="input-group">
+								<input type="search" name="search" placeholder="e-g Iphone X"
+									class="form-control"> <span class="input-group-btn">
+									<button class="btn btn-primary" type="submit">
+										<span class="glyphicon glyphicon-search" aria-hidden="true">
+										</span> Search!
+									</button>
+								</span>
+							</div>
+						</div>
+					
+				</form>
+				<form>
+						<div class="col-md-6">
+							<div class="input-group">
+								<input type="hidden" name="search" value=""
+									class="form-control"> <span class="input-group-btn">
+									<button class="btn btn-warning" type="submit">
+										<span class="glyphicon glyphicon-list" aria-hidden="true">
+										</span> List All
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
 				</form>
 
 				<c:choose>
@@ -64,19 +85,10 @@
 									<td><c:out value="${row.product_name}" /></td>
 									<td><c:out value="${row.color}" /></td>												
 									<td>
-										<a href="updateProduct.jsp?pid=<c:out value="${row.pid}"/>">
-										<button
-												type="button" class="btn btn-primary">
-												Update
-										</button>
-										</a>
+										<a class="btn btn-primary" href="updateProduct.jsp?id=<c:out value="${row.id}"/>">Update</a>
 									</td>
 									<td>
-										<a href="javascript:confirmGo('Sure to delete this record?','deleteProductdb.jsp?pid=<c:out value="${row.pid}"/>')">
-										<button
-												type="button" class="btn btn-primary">
-												Delete
-												</button>
+										<a class="btn btn-danger" href="javascript:confirmGo('Sure to delete this record?','deleteProductdb.jsp?id=<c:out value="${row.id}"/>')">Delete
 										</a>
 									</td>
 								</tr>
@@ -103,74 +115,4 @@
 
 
 <%@include file="./shared/footer.jsp"%>
-<%-- <%@ page import="java.io.*,java.util.*,java.sql.*, Configs.*"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-<html>
-<head>
-<title>Admin - Product List</title>
-<script>
-            function confirmGo(m,u) {
-                if ( confirm(m) ) {
-                    window.location = u;
-                }
-            }
-        </script>
-</head>
-<body>
-
-	<sql:setDataSource var="dbsource" driver="com.mysql.jdbc.Driver"
-		url="jdbc:mysql://localhost:3306/project_part1" user="${DbConfig.username}"
-		password="${DbConfig.password}" />
-
-	<form style="display: inline-block">
-		<input type="text" name="search" /> <input type="submit"
-			value="Search" />
-	</form>
-	<form style="display: inline-block">
-		<input type="hidden" name="search" value="" /> <input type="submit"
-			value="Clear" />
-	</form>
-
-	<c:choose>
-		<c:when test="${empty param.search}">
-			<sql:query dataSource="${dbsource}" var="result">
-            		SELECT * from product;
-        		</sql:query>
-		</c:when>
-		<c:otherwise>
-			<sql:query dataSource="${dbsource}" var="result">
-            		SELECT * from product
-            		WHERE product_name LIKE '%${param.search}%' 
-            		OR color LIKE '%${param.search}%' 
-        		</sql:query>
-		</c:otherwise>
-	</c:choose>
-
-	<form>
-		<table border="1">
-			<caption>Product List</caption>
-			<tr>
-				<th>Product Name</th>
-				<th>color</th>
-				<th colspan="2">Action</th>
-			</tr>
-			<c:forEach var="row" items="${result.rows}">
-				<tr>
-					<td><c:out value="${row.product_name}" /></td>
-					<td><c:out value="${row.color}" /></td>
-					<td><a
-						href="updateProduct.jsp?product_name=<c:out value="${row.product_name}"/>">Update</a></td>
-					<td><a
-						href="javascript:confirmGo('Sure to delete this record?','deleteProductdb.jsp?product_name=<c:out value="${row.product_name}"/>')">Delete</a></td>
-
-				</tr>
-			</c:forEach>
-		</table>
-	</form>
-	<a href="index.jsp">Go Home</a>
-
-</body>
-</html>
- --%>

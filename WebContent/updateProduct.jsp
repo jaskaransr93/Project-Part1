@@ -15,44 +15,38 @@
 						<c:out value="${param.errMsg}" />
 					</div>
 				</c:if>
+				<c:if test="${empty param.id}">
+    				<c:redirect url="displayProduct.jsp" />
+				</c:if>
 				<sql:query dataSource="${dbsource}" var="result">
-		            SELECT * from product where pid=?;
-		            <sql:param value="${param.pid}" />
+		            SELECT * from product where id=?;
+		            <sql:param value="${param.id}" />
 		        </sql:query>
-				<form action="insertRegisterProduct.jsp" method="post">
-					
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Product Name</label> <select name="p_id"
-									class="form-control">
-									<c:forEach var="row" items="${result.rows}">
-										<option value="<c:out value='${row.id}'/>"><c:out
-												value="${row.product_name}" /></option>
-									</c:forEach>
-								</select>
+				<form action="updateProductdb.jsp" method="post">
+					<c:forEach var="row" items="${result.rows}">
+						<input type="hidden" class="form-control" name="id" value="${row.id}" />
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Product Name</label> 
+									<input
+										type="text" class="form-control" name="product_name" value="${row.product_name}" />
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label>Purchase Date</label> <input type="text"
-									class="form-control" name="pdate" id="datepicker" />
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Color</label> 
+									<input type="text"
+										class="form-control" name="color" value="${row.color}" />
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label class="control-label" for="username">Serial No</label> <input
-									type="text" class="form-control" name="serial" />
-									
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 
-					<input class="btn btn-success" type="submit" value="Register" /> <input
+					<input class="btn btn-success" type="submit" value="Register" /> 
+					<input
 						class="btn btn-primary" type="reset" value="reset" />
 				</form>
 			</div>

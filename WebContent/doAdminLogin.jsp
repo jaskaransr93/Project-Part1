@@ -7,7 +7,7 @@
         <title>JINSERT Product</title>
     </head>
     <body>
-        <c:if test="${ empty param.username or empty param.upassword}">
+        <c:if test="${ empty param.username or empty param.upassword }">
             <c:redirect url="adminLoginForm.jsp" >
                 <c:param name="errMsg" value="Please Enter Username and Password!" />
             </c:redirect>
@@ -22,6 +22,12 @@
             and upassword='${param.upassword}'
         </sql:query>
         <c:if test="${count.rowCount>0}">
+             <c:set scope="session"
+                   var="loginUser"
+                   value="${param.username}"/>
+                   <c:set scope="session"
+                   var="loginUserName"
+                   value="${count.rows[0].uname}"/>
              <c:redirect url="index.jsp" >
                 
             </c:redirect>        
