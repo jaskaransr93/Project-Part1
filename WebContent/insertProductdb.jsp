@@ -9,13 +9,13 @@
     <body>
         <c:if test="${ empty param.product_name or empty param.color}">
             <c:redirect url="insertProduct.jsp" >
-                <c:param name="errMsg" value="Please Enter Product and Quantity" />
+                <c:param name="errMsg" value="Please Enter Product and Color" />
             </c:redirect>
  
         </c:if>
         <sql:setDataSource var="dbsource" driver="com.mysql.jdbc.Driver"
                            url="jdbc:mysql://localhost:3306/project_part1"
-                           user="root"  password="12345"/>
+                           user="${DbConfig.username}"  password="${DbConfig.password}"/>
  
  
         <sql:update dataSource="${dbsource}" var="result">

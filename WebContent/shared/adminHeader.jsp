@@ -168,7 +168,7 @@
 }
 </style>
 <c:if test="${empty sessionScope['loginUser']}">
-    <c:redirect url="userLoginForm.jsp" />
+    <c:redirect url="adminLoginForm.jsp" />
 </c:if>
 </head>
 <body>
