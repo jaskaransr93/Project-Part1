@@ -11,8 +11,18 @@
 <body>
 	<c:remove var="loginUser" scope="session" />
 	<c:remove var="loginUserName" scope="session" />
-	<c:redirect url="userLoginForm.jsp">
-		<c:param name="succMsg" value="Successfully Logged out!" />
-	</c:redirect>
+	<c:choose>
+		<c:when test="${param.type == 'admin'}">
+			<c:redirect url="adminLoginForm.jsp">
+				<c:param name="succMsg" value="Successfully Logged out!" />
+			</c:redirect>
+		</c:when>
+		<c:otherwise>
+			<c:redirect url="userLoginForm.jsp">
+				<c:param name="succMsg" value="Successfully Logged out!" />
+			</c:redirect>
+		</c:otherwise>
+	</c:choose>
+
 </body>
 </html>

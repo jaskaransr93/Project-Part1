@@ -198,7 +198,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="fa fa-angle-down"></b></a>
                 <ul class="dropdown-menu">
                    
-                    <li><a href="logoutUser.jsp"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                    <li><a href="logoutUser.jsp?type=admin"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
                 </ul>
             </li>
         </ul>

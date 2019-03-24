@@ -17,7 +17,7 @@
 		</a></li>
 		<li><a href="displayClaims.jsp"><i class="fa fa-fw fa-star"></i>
 				Claims </a></li>
-		<li><a href="logoutUser.jsp"><i class="fa fa-fw fa-sign-out"></i>
+		<li><a href="logoutUser.jsp?type=admin"><i class="fa fa-fw fa-sign-out"></i>
 				Logout</a></li>
 	</ul>
 </div>
