@@ -26,7 +26,13 @@
          <c:set scope="session"
                    var="loginUser"
                    value="${param.username}"/>
-             <c:redirect url="dashboardUser.jsp" />
+                   <c:set scope="session"
+                   var="loginUserName"
+                   value="${count.rows[0].uname}"/>
+                   
+                   <c:redirect url="dashboardUser.jsp" >
+            </c:redirect>
+             
         </c:if>
         <c:if test="${count.rowCount<=0}">
              <c:redirect url="userLoginForm.jsp" >

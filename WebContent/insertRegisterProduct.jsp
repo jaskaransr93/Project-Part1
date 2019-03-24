@@ -16,15 +16,15 @@
         <sql:setDataSource var="dbsource" driver="com.mysql.jdbc.Driver"
                            url="jdbc:mysql://localhost:3306/project_part1"
                            user="${DbConfig.username}"  password="${DbConfig.password}"/>
-       <%--  <sql:query dataSource="${dbsource}" var="count">
-            Select * FROM user
-            WHERE username='${param.username}'
+        <sql:query dataSource="${dbsource}" var="count">
+            Select * FROM registered_product
+            WHERE username='${sessionScope['loginUser']}' and pid=${param.p_id}
         </sql:query>
-        <c:if test="${count.rowCount<=0}">
+        <c:if test="${count.rowCount>0}">
              <c:redirect url="registerProductForm.jsp" >
-                <c:param name="errMsg" value="Username not exists!" />
+                <c:param name="errMsg" value="Error Product already registered!" />
             </c:redirect>        
-        </c:if> --%>
+        </c:if>
  
  
         <sql:update dataSource="${dbsource}" var="result">

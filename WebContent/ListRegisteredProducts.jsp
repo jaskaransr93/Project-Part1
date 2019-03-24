@@ -10,12 +10,34 @@
 			<div class="col-sm-12 col-md-12 well" id="content">
 
 				<form style="display: inline-block">
-					<input type="text" name="search" /> <input type="submit"
-						value="Search" />
+					<div class="row">
+						<div class="col-md-6">
+							<div class="input-group">
+								<input type="search" name="search" placeholder="e-g Iphone X"
+									class="form-control"> <span class="input-group-btn">
+									<button class="btn btn-primary" type="submit">
+										<span class="glyphicon glyphicon-search" aria-hidden="true">
+										</span> Search!
+									</button>
+								</span>
+							</div>
+						</div>
+					
 				</form>
-				<form style="display: inline-block">
-					<input type="hidden" name="search" value="" /> <input
-						type="submit" value="Clear" />
+				<form>
+					
+						<div class="col-md-6">
+							<div class="input-group">
+								<input type="hidden" name="search" value=""
+									class="form-control"> <span class="input-group-btn">
+									<button class="btn btn-warning" type="submit">
+										<span class="glyphicon glyphicon-list" aria-hidden="true">
+										</span> List All
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
 				</form>
 
 				<c:choose>
@@ -26,8 +48,7 @@
 					</c:when>
 					<c:otherwise>
 						<sql:query dataSource="${dbsource}" var="result">
-            		SELECT * from registered_product JOIN product ON registered_product.pid=product.id
-            		WHERE pid LIKE '%${param.search}%' and username=${sessionScope['loginUser']};
+            		SELECT registered_product.*,product.product_name from registered_product JOIN product ON registered_product.pid=product.id WHERE product.product_name LIKE '%${param.search}%' and registered_product.username='${sessionScope['loginUser']}';
         		</sql:query>
 					</c:otherwise>
 				</c:choose>
@@ -52,7 +73,7 @@
 					<tbody>
 						<c:if test="${result.rowCount>0}">
 							<c:forEach var="row" items="${result.rows}">
-							
+
 								<c:set var="count" value="${count + 1}" scope="page" />
 								<tr>
 									<th scope="row"><c:out value="${count}" /></th>
