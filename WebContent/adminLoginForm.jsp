@@ -36,7 +36,7 @@
 	href="https://getbootstrap.com/docs/4.3/examples/sign-in/signin.css"
 	rel="stylesheet">
 </head>
-<body>
+<body class="text-center">
 	<form class="form-signin" action="doAdminLogin.jsp" method="post">
 		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 		<c:if test="${not empty param.succMsg}">

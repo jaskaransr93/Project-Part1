@@ -40,7 +40,7 @@
             <font size="5" color='green'> Congratulations ! Data inserted
             successfully.</font>
  
-            <c:redirect url="registerUserForm.jsp" >
+            <c:redirect url="userLoginForm.jsp" >
                 <c:param name="susMsg" value="Congratulations ! Data inserted
             successfully." />
             </c:redirect>

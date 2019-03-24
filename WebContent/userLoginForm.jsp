@@ -71,7 +71,8 @@
 
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
 			in</button>
-	<a href="registerUserForm.jsp">Click here to Register</a>		
+	<p><a href="registerUserForm.jsp">Click here to Register</a></p>	
+	<p><a href="adminLoginForm.jsp">Admin Login</a></p>			
 		<p class="mt-5 mb-3 text-muted">&copy; 2019</p>
 	</form>
 	
